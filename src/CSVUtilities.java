@@ -16,8 +16,7 @@ public class CSVUtilities {
     public CSVUtilities(String fileName){
         CSVData = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
-        try (BufferedReader br = Files.newBufferedReader(pathToFile,
-                StandardCharsets.US_ASCII)) {
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
 
             // read the first line from the text file
             String line = br.readLine();
@@ -50,6 +49,31 @@ public class CSVUtilities {
             headers.add(x[i]);
         }
         return headers;
+    }
+    public List<String> getDataString(int column){
+        List<String> result = new ArrayList<String>();
+        for(int i = 1; i < CSVData.size(); i++){
+            String[] test = CSVData.get(i).split(",");
+            result.add(test[column]);
+        }
+        return result;
+    }
+    public List<Integer> getDataInt(int column){
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i = 1; i < CSVData.size(); i++){
+            String[] test = CSVData.get(i).split(",");
+            result.add(Integer.valueOf(test[column]));
+        }
+        return result;
+    }
+
+    public List<Double> getDataDouble(int column){
+        List<Double> result = new ArrayList<Double>();
+        for(int i = 1; i < CSVData.size(); i++){
+            String[] test = CSVData.get(i).split(",");
+            result.add(Double.valueOf(test[column]));
+        }
+        return result;
     }
 
 }
